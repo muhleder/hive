@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive/src/backend/storage_backend.dart';
 import 'package:hive/src/backend/vm/storage_backend_vm.dart';
 import 'package:meta/meta.dart';
 
 class BackendManager implements BackendManagerInterface {
-  final delimiter = Platform.isWindows ? '\\' : '/';
+  final delimiter = (!kIsWeb && Platform.isWindows) ? '\\' : '/';
 
   @override
   Future<StorageBackend> open(
